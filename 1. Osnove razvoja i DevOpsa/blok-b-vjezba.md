@@ -11,7 +11,7 @@ Cilj: svaki student na kraju bloka ima Linux okruženje (WSL ili nativno), konfi
 | 50–63 | 5. Python i venv |
 | 63–80 | 6. Provjera, prvi commit i push |
 
-> macOS i Linux: korak 1 se preskače; pakete instalirati s `brew` (macOS) ili `apt` (Linux). Ostali koraci su isti.
+> macOS i Linux: korak 1 se preskače; pakete instalirati s `brew` (macOS) ili `apt` (Ubuntu). Ostali koraci su isti.
 
 ## 1. WSL i Ubuntu (Windows)
 U PowerShellu kao administrator:
