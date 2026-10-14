@@ -2,14 +2,14 @@
 
 Cilj: svaki student na kraju bloka ima Linux okruženje (WSL ili nativno), konfiguriran git, prijavljen gh CLI, Python venv i prvi commit u osobnom repozitoriju u organizaciji kolegija.
 
-| Min | Korak |
-|---|---|
-| 0–15 | 1. WSL i Ubuntu |
-| 15–27 | 2. CLI alati |
-| 27–37 | 3. Git |
-| 37–50 | 4. GitHub CLI i osobni repozitorij |
-| 50–63 | 5. Python i venv |
-| 63–80 | 6. Provjera, prvi commit i push |
+| Sadržaj |
+|---|
+| 1. WSL i Ubuntu |
+| 2. CLI alati |
+| 3. Git |
+| 4. GitHub CLI i osobni repozitorij |
+| 5. Python i venv |
+| 6. Provjera, prvi commit i push |
 
 > macOS i Linux: korak 1 se preskače; pakete instalirati s `brew` (macOS) ili `apt` (Ubuntu). Ostali koraci su isti.
 
@@ -131,12 +131,13 @@ Instalacija na Ubuntuu (službeni apt repozitorij):
  && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null \
  && sudo apt update && sudo apt install -y gh
 ```
-Prijava i repozitorij (zamijeniti `<organizacija>`):
+Prijava i repozitorij:
 ```bash
 gh auth login            # GitHub.com → HTTPS → Login with a web browser
 gh auth setup-git        # git uses gh for authentication
-gh repo create <organizacija>/praktikum-$(gh api user -q .login) --private --clone
-cd praktikum-$(gh api user -q .login)
+GITHUB_USERNAME=$(gh api user -q .login)
+gh repo create unipu-praktikum-razvojne-operacije/praktikum-$GITHUB_USERNAME --public --clone
+cd praktikum-$GITHUB_USERNAME
 ```
 Ako student nije prihvatio pozivnicu u organizaciju: `gh api user/memberships/orgs` ili prihvatiti na github.com.
 
@@ -191,7 +192,6 @@ git push
 gh run list --limit 1        # follow the run
 gh pr list                   # after a few seconds: release PR "chore(main): release 0.1.0"
 ```
-Spojiti release PR (`gh pr merge --squash <broj>`) i provjeriti `gh release list` i sadržaj `VERSION.txt`.
 
 Napomena: prije `feat` commita verzija je 0.0.1; release-please ispod 1.0.0 za `feat` podiže minor verziju (0.1.0), a za `fix` patch verziju (0.0.2).
 
